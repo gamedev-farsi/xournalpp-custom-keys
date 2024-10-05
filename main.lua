@@ -5,10 +5,6 @@ local COLOR_PURPLE = 0x8c367c
 local COLOR_YELLOW = 0xcfab4a
 local COLOR_WHITE = 0xeaeaeb
 
-function switchToColor(color)
-    app.changeToolColor({["color"] = color, ["selection"] = true})
-end
-
 function registerUi(app, name, callback, accelerator)
     app.registerUi({
         ["menu"] = name,
@@ -17,21 +13,9 @@ function registerUi(app, name, callback, accelerator)
     })
 end
 
-function initUi()
-    -- Tools shortcuts
-    registerUi(app, "Pen Tool", "pen", "w")
-    registerUi(app, "Eraser Tool", "eraser", "e")
-    registerUi(app, "Text Tool", "text", "t")
-
-    -- Colors shortcuts
-    registerUi(app, "Color > Red", "switchToRed", "<shift>r")
-    registerUi(app, "Color > Green", "switchToGreen", "<shift>g")
-    registerUi(app, "Color > Blue", "switchToBlue", "<shift>b")
-    registerUi(app, "Color > White", "switchToWhite", "<shift>w")
-    registerUi(app, "Color > Purple", "switchToPurple", "<shift>p")
-    registerUi(app, "Color > Yellow", "switchToYellow", "<shift>y")
+function switchToColor(color)
+    app.changeToolColor({["color"] = color, ["selection"] = true})
 end
-
 
 function switchToRed()
     switchToColor(COLOR_RED)
@@ -52,7 +36,6 @@ function switchToYellow()
     switchToColor(COLOR_YELLOW)
 end
 
-
 function pen()
     app.uiAction({ ["action"] = "ACTION_TOOL_PEN" })
 end
@@ -65,10 +48,17 @@ function text()
     app.uiAction({ ["action"] = "ACTION_TOOL_TEXT" })
 end
 
-function select()
-    app.uiAction({ ["action"] = "ACTION_TOOL_SELECT_RECTANGLE" })
-end
+function initUi()
+    -- Tools shortcuts
+    registerUi(app, "Pen Tool", "pen", "w")
+    registerUi(app, "Eraser Tool", "eraser", "e")
+    registerUi(app, "Text Tool", "text", "t")
 
-function hand()
-    app.uiAction({ ["action"] = "ACTION_TOOL_HAND" })
+    -- Colors shortcuts
+    registerUi(app, "Color > Red", "switchToRed", "<shift>r")
+    registerUi(app, "Color > Green", "switchToGreen", "<shift>g")
+    registerUi(app, "Color > Blue", "switchToBlue", "<shift>b")
+    registerUi(app, "Color > White", "switchToWhite", "<shift>w")
+    registerUi(app, "Color > Purple", "switchToPurple", "<shift>p")
+    registerUi(app, "Color > Yellow", "switchToYellow", "<shift>y")
 end
